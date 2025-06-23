@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Byte Sync Informatic - Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="Favicon.ico" type="image/x-icon" />
+
+  <style>
+    /* Reset básico */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* Vídeo de fundo */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      will-change: opacity;
+      background: black; /* fallback */
+    }
+
+    /* Estilo geral do body */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.4;
+    }
+
+    /* Container central */
+    .container {
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #462975;
+    }
+
+    /* Imagem de perfil/logo */
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #462975;
+      box-shadow: 0 0 15px #462975;
+
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+
+      -webkit-touch-callout: none; /* desabilita menu contextual no iOS */
+      -webkit-user-drag: none;     /* impede arrastar imagem em Safari/Chrome */
+    }
+
+    /* Título */
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 0 0 8px #462975, 0 0 4px #000;
+      word-break: break-word;
+    }
+
+    /* Texto de descrição */
+    p {
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 8px #462975, 0 0 4px #000;
+      word-break: break-word;
+    }
+
+    /* Botões de link */
+    .links a {
+      display: block;
+      background-color: #462975;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #462975;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      outline-offset: 4px;
+      outline-color: transparent;
+      cursor: pointer;
+    }
+
+    .links a:focus-visible {
+      outline: 2px solid #fff;
+      box-shadow: 0 0 8px #fff;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(233, 30, 99, 1), 0 0 40px rgba(233, 30, 99, 0.7);
+      background-color: #c2185b;
+      outline-color: transparent;
+    }
+
+    /* Texto de copyright */
+    #copyright {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      .container {
+        padding: 25px 20px;
+        max-width: 100%;
+        box-shadow: none;
+        backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.6);
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .links a {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      .links a {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+      .profile-pic {
+        width: 90px;
+        height: 90px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Vídeo de fundo com poster para carregamento instantâneo -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    id="bg-video"
+    poster="Wallpaper-poster.jpg"
+    aria-label="Vídeo de fundo animado"
+    aria-hidden="true"
+  >
+    <source src="Wallpaper.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo em background.
+  </video>
+
+  <!-- Conteúdo principal -->
+  <main class="container" role="main" tabindex="-1">
+    <img
+      src="Logo.png"
+      alt="Logo da Byte Sync Informatic"
+      class="profile-pic"
+      width="120"
+      height="120"
+      loading="lazy"
+    />
+    <h1>Byte Sync Informatic</h1>
+    <p>Meus links de contato</p>
+
+    <nav class="links" role="navigation" aria-label="Links de contato">
+      <a href="https://instagram.com/bytesyncinformatic" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
+      <a href="https://wa.me/5511930522075" target="_blank" rel="noopener noreferrer" tabindex="0">WhatsApp</a>
+      <a href="https://tiktok.com/@bytesyncinformatic" target="_blank" rel="noopener noreferrer" tabindex="0">TikTok</a>
+      <a href="https://github.com/luanoliveiralab" target="_blank" rel="noopener noreferrer" tabindex="0">GitHub</a>
+    </nav>
+
+    <p id="copyright" aria-label="Copyright"></p>
+  </main>
+
+  <script>
+    const video = document.getElementById('bg-video');
+
+    function showVideo() {
+      video.style.opacity = '1';
+      video.removeEventListener('canplaythrough', showVideo);
+      video.removeEventListener('loadeddata', showVideo);
+    }
+
+    video.addEventListener('canplaythrough', showVideo);
+    video.addEventListener('loadeddata', showVideo);
+
+    // Fallback para forçar mostrar o vídeo após 5 segundos
+    setTimeout(() => {
+      if (video.style.opacity !== '1') {
+        video.style.opacity = '1';
+      }
+    }, 5000);
+
+    // Atualiza o copyright com o ano atual
+    document.getElementById('copyright').textContent =
+      `© ${new Date().getFullYear()} Byte Sync Informatic. Todos os direitos reservados.`;
+
+    // Remove o foco dos links ao toque no celular e clique no desktop
+    document.querySelectorAll('.links a').forEach(link => {
+      ['mousedown', 'touchstart'].forEach(eventType => {
+        link.addEventListener(eventType, () => {
+          link.blur();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
