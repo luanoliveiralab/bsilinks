@@ -138,6 +138,375 @@
       color: #aaa;
     }
 
+    /* Assistente Virtual */
+    .assistant-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .assistant-toggle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #462975, #c2185b);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(70, 41, 117, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .assistant-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(70, 41, 117, 0.6);
+    }
+
+    .assistant-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #c2185b, #462975);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .assistant-toggle:hover::before {
+      opacity: 1;
+    }
+
+    .assistant-toggle span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .assistant-title {
+      position: absolute;
+      right: 80px;
+      bottom: 15px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px #462975, 0 0 4px #000;
+      margin: 0;
+      white-space: nowrap;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .assistant-title:hover {
+      opacity: 1;
+    }
+
+    .assistant-box {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 300px;
+      max-height: 450px;
+      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #462975;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #462975;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.9);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .assistant-box.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .assistant-header {
+      background: linear-gradient(135deg, #462975, #c2185b);
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 13px 13px 0 0;
+    }
+
+    .assistant-header h3 {
+      color: white;
+      font-size: 1rem;
+      margin: 0;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .assistant-content {
+      display: flex;
+      flex-direction: column;
+      height: 350px;
+      background: transparent;
+    }
+
+    .assistant-message {
+      background: rgba(70, 41, 117, 0.2);
+      border: 1px solid rgba(70, 41, 117, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      color: #fff;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .assistant-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .assistant-btn {
+      background: #462975;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+    }
+
+    .assistant-btn:hover {
+      background: #c2185b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(194, 24, 91, 0.4);
+    }
+
+
+
+    /* Chat Interface */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 0 20px;
+      margin-bottom: 0;
+      max-height: none;
+    }
+
+    .chat-controls {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid rgba(70, 41, 117, 0.2);
+    }
+
+    .message {
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      word-wrap: break-word;
+      backdrop-filter: blur(2px);
+    }
+
+    .message.user {
+      background: rgba(194, 24, 91, 0.2);
+      border: 1px solid rgba(194, 24, 91, 0.3);
+      margin-left: 20px;
+      text-align: right;
+      box-shadow: 0 0 8px rgba(194, 24, 91, 0.2);
+    }
+
+    .message.assistant {
+      background: rgba(70, 41, 117, 0.2);
+      border: 1px solid rgba(70, 41, 117, 0.3);
+      margin-right: 20px;
+      box-shadow: 0 0 8px rgba(70, 41, 117, 0.2);
+    }
+
+    .chat-input-container {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(70, 41, 117, 0.3);
+      border-radius: 20px;
+      padding: 8px 15px;
+      color: white;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .chat-input:focus {
+      border-color: #c2185b;
+    }
+
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .send-btn {
+      background: #462975;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .send-btn:hover {
+      background: #c2185b;
+      transform: scale(1.1);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .quick-action-btn {
+      background: rgba(70, 41, 117, 0.2);
+      border: 1px solid rgba(70, 41, 117, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .quick-action-btn:hover {
+      background: rgba(194, 24, 91, 0.3);
+      border-color: rgba(194, 24, 91, 0.4);
+      box-shadow: 0 0 8px rgba(194, 24, 91, 0.3);
+    }
+
+    /* Botões de Avaliação */
+    .evaluation-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .eval-btn {
+      flex: 1;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .eval-yes {
+      background: rgba(76, 175, 80, 0.3);
+      border: 1px solid rgba(76, 175, 80, 0.4);
+      color: #4CAF50;
+    }
+
+    .eval-yes:hover {
+      background: rgba(76, 175, 80, 0.4);
+      border-color: rgba(76, 175, 80, 0.5);
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .eval-no {
+      background: rgba(244, 67, 54, 0.3);
+      border: 1px solid rgba(244, 67, 54, 0.4);
+      color: #F44336;
+    }
+
+    .eval-no:hover {
+      background: rgba(244, 67, 54, 0.4);
+      border-color: rgba(244, 67, 54, 0.5);
+      box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .typing-indicator {
+      display: none;
+      padding: 10px 12px;
+      background: rgba(70, 41, 117, 0.2);
+      border: 1px solid rgba(70, 41, 117, 0.3);
+      border-radius: 12px;
+      margin-right: 20px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 0 8px rgba(70, 41, 117, 0.2);
+      align-self: flex-start;
+    }
+
+    .typing-indicator.show {
+      display: block;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
     /* Responsividade */
     @media (max-width: 600px) {
       body {
@@ -165,6 +534,22 @@
         width: 100px;
         height: 100px;
       }
+
+      .assistant-container {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .assistant-toggle {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+      }
+
+      .assistant-box {
+        width: 280px;
+        right: -10px;
+      }
     }
 
     @media (max-width: 360px) {
@@ -178,6 +563,11 @@
       .profile-pic {
         width: 90px;
         height: 90px;
+      }
+
+      .assistant-box {
+        width: 260px;
+        right: -20px;
       }
     }
   </style>
@@ -223,6 +613,57 @@
     <p id="copyright" aria-label="Copyright"></p>
   </main>
 
+  <!-- Assistente Virtual -->
+  <div class="assistant-container">
+    <h2 class="assistant-title">Luna - IA</h2>
+    <button class="assistant-toggle" id="assistantToggle" aria-label="Abrir Luna - assistente virtual">
+      <span>🌙</span>
+    </button>
+    
+    <div class="assistant-box" id="assistantBox">
+      <div class="assistant-header">
+        <h3>Luna - Feita com IA.</h3>
+      </div>
+      
+      <div class="assistant-content">
+        <div class="chat-messages" id="chatMessages">
+          <div class="message assistant initial-message">
+            Olá! Sou a Luna, assistente virtual da Byte Sync Informatic 🌙<br>
+            Posso auxiliá-lo com informações sobre nossos serviços, produtos e esclarecer suas dúvidas técnicas. Como posso ajudá-lo hoje?
+          </div>
+          
+          <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-controls">
+          <div class="quick-actions">
+            <button class="quick-action-btn" onclick="sendQuickMessage('Quais serviços vocês oferecem?')">Serviços</button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Tabela de preços')">Preços</button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Formas de pagamento')">Pagamento</button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Como entrar em contato?')">Contato</button>
+          </div>
+          
+          <div class="chat-input-container">
+            <input 
+              type="text" 
+              class="chat-input" 
+              id="chatInput" 
+              placeholder="Digite sua pergunta..."
+              maxlength="200"
+            >
+            <button class="send-btn" id="sendBtn">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const video = document.getElementById('bg-video');
 
@@ -254,6 +695,1370 @@
         });
       });
     });
+
+    // Funcionalidade da Assistente Virtual
+    const assistantToggle = document.getElementById('assistantToggle');
+    const assistantBox = document.getElementById('assistantBox');
+    let isAssistantOpen = false;
+
+    // Função para alternar a assistente
+    function toggleAssistant() {
+      isAssistantOpen = !isAssistantOpen;
+      
+      if (isAssistantOpen) {
+        assistantBox.classList.add('active');
+        assistantToggle.setAttribute('aria-label', 'Fechar Luna - assistente virtual');
+        assistantToggle.querySelector('span').textContent = '✕';
+      } else {
+        assistantBox.classList.remove('active');
+        assistantToggle.setAttribute('aria-label', 'Abrir Luna - assistente virtual');
+        assistantToggle.querySelector('span').textContent = '🌙';
+      }
+    }
+
+    // Event listeners para a assistente
+    assistantToggle.addEventListener('click', toggleAssistant);
+
+    // Fechar assistente ao clicar fora dela
+    document.addEventListener('click', (e) => {
+      if (isAssistantOpen && 
+          !assistantToggle.contains(e.target) && 
+          !assistantBox.contains(e.target) &&
+          !e.target.classList.contains('eval-btn')) {
+        toggleAssistant();
+      }
+    });
+
+    // Fechar assistente com tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isAssistantOpen) {
+        toggleAssistant();
+      }
+    });
+
+    // Suporte para toque em dispositivos móveis
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    assistantBox.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    });
+
+    assistantBox.addEventListener('touchend', (e) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const swipeDistance = touchStartY - touchEndY;
+      
+      // Se o usuário deslizar para baixo mais de 50px, fecha a assistente
+      if (swipeDistance < -50) {
+        toggleAssistant();
+      }
+    });
+
+    // Animação de entrada da assistente após carregamento da página
+    setTimeout(() => {
+      assistantToggle.style.animation = 'pulse 2s infinite';
+    }, 2000);
+
+    // Adicionar animação de pulse
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Sistema de IA Conversacional
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    // Sistema de aprendizado e histórico de pesquisas
+    let userSearchHistory = [];
+    let categoryWeights = {};
+    let searchCount = 0;
+
+    // Base de conhecimento da IA
+    const knowledgeBase = {
+      servicos: {
+        keywords: ['serviços', 'serviço', 'oferecem', 'fazem', 'trabalham', 'desenvolvem', 'montagem', 'formatação', 'reparo', 'limpeza'],
+        response: `A Byte Sync Informatic oferece os seguintes serviços especializados:
+
+🖥️ **Montagem de Computadores**
+• Montagem personalizada de computadores desktop
+• Configuração e otimização de notebooks
+• Sistemas otimizados para jogos e trabalho profissional
+• Garantia de qualidade em todos os componentes
+
+💻 **Formatação e Sistemas Operacionais**
+• Formatação completa de computadores e notebooks
+• Instalação e configuração de Windows e Linux
+• Instalação e atualização de drivers
+• Backup e recuperação de dados importantes
+
+🔧 **Reparo e Manutenção Técnica**
+• Diagnóstico preciso de problemas de hardware e software
+• Reparo especializado de componentes
+• Substituição de peças com garantia
+• Manutenção preventiva para evitar problemas futuros
+
+🧹 **Limpeza Profissional**
+• Limpeza completa e detalhada de computadores
+• Limpeza especializada de notebooks
+• Troca de pasta térmica para melhor refrigeração
+• Manutenção e limpeza de ventiladores
+
+🌐 **Desenvolvimento Web**
+• Criação de sites responsivos e modernos
+• Desenvolvimento front-end especializado
+• Otimização de performance e usabilidade`
+      },
+      contato: {
+        keywords: ['contato', 'contatar', 'falar', 'whatsapp', 'telefone', 'email', 'localização', 'onde', 'endereço'],
+        response: `Aqui estão nossas formas de contato:
+
+📱 **WhatsApp**: (11) 93052-2075
+📸 **Instagram**: @bytesyncinformatic
+🎵 **TikTok**: @bytesyncinformatic
+💻 **GitHub**: github.com/luanoliveiralab
+
+Para atendimento mais rápido e personalizado, recomendamos o contato através do WhatsApp. Você pode acessar diretamente através dos links disponíveis em nosso site.`
+      },
+      tecnologias: {
+        keywords: ['tecnologias', 'tecnologia', 'linguagens', 'frameworks', 'ferramentas', 'stack', 'frontend', 'desenvolvimento'],
+        response: `Nossas tecnologias de desenvolvimento e hardware:
+
+🌐 **Desenvolvimento Front-end**
+• HTML5, CSS3, JavaScript
+• React, Vue.js
+• Bootstrap, Tailwind CSS
+• Sites responsivos e modernos
+
+💻 **Sistemas Operacionais**
+• Windows 10/11
+• Linux (Ubuntu, Mint)
+• Instalação e configuração
+• Otimização de performance
+
+🖥️ **Hardware Suportado**
+• Processadores Intel e AMD
+• Placas de vídeo NVIDIA e AMD
+• Memórias DDR3, DDR4, DDR5
+• HDs, SSDs, NVMe
+
+🛠️ **Ferramentas de Trabalho**
+• VS Code, IntelliJ
+• Figma, Adobe XD
+• Ferramentas de diagnóstico
+• Software de limpeza e manutenção`
+      },
+      precos: {
+        keywords: ['preços', 'preço', 'valor', 'custo', 'orçamento', 'quanto custa', 'tarifa', 'tabela'],
+        response: `Nossa tabela de preços para serviços de Tecnologia da Informação:
+
+💻 **Serviços de Manutenção**
+• **Formatação**: A partir de R$ 80,00
+• **Limpeza**: A partir de R$ 60,00
+• **Diagnóstico**: A partir de R$ 40,00
+• **Reparo**: A partir de R$ 100,00
+
+🖥️ **Montagem de Computadores**
+• **Computador Básico**: A partir de R$ 1.500,00
+• **Computador Gamer**: A partir de R$ 3.000,00
+• **Computador Profissional**: A partir de R$ 2.500,00
+• **Montagem + Formatação**: Serviço incluso
+
+🛒 **Hardware e Periféricos**
+• **Processadores**: R$ 300,00 - R$ 2.000,00
+• **Memórias RAM**: R$ 150,00 - R$ 800,00
+• **HDs e SSDs**: R$ 200,00 - R$ 1.000,00
+• **Periféricos**: R$ 50,00 - R$ 500,00
+
+💡 **Orçamento Personalizado**: Entre em contato através do WhatsApp para solicitar um orçamento específico para suas necessidades!`
+      },
+      sobre: {
+        keywords: ['sobre', 'empresa', 'quem são', 'história', 'missão', 'visão', 'especialidade'],
+        response: `Informações sobre a Byte Sync Informatic:
+
+🎯 **Nossa Missão**
+Oferecer soluções completas e profissionais em manutenção, montagem e comercialização de computadores, garantindo qualidade e confiança em todos os serviços prestados.
+
+💡 **Nossa Visão**
+Ser reconhecida como referência em serviços de TI, montagem de computadores e comercialização de hardware em nossa região.
+
+🚀 **Nossos Valores**
+• Qualidade e excelência em primeiro lugar
+• Atendimento personalizado e dedicado
+• Transparência total em todos os processos
+• Garantia de qualidade em todos os serviços
+
+📈 **Nossas Especialidades**
+• Montagem personalizada de computadores
+• Formatação e instalação de sistemas operacionais
+• Limpeza e manutenção preventiva
+• Reparo e diagnóstico técnico de problemas
+• Comercialização de hardware e periféricos
+• Desenvolvimento web front-end`
+      },
+      portfolio: {
+        keywords: ['portfólio', 'projetos', 'trabalhos', 'cases', 'exemplos', 'github', 'computadores montados'],
+        response: `Nossos trabalhos e projetos realizados:
+
+💻 **GitHub**: github.com/luanoliveiralab
+🖥️ **Computadores Montados**: Sistemas gamers e profissionais
+🌐 **Sites Desenvolvidos**: Sites responsivos e modernos
+🔧 **Manutenções Realizadas**: Limpezas e reparos especializados
+🛒 **Hardware Comercializado**: Processadores, memórias, periféricos
+
+**Tecnologias Utilizadas:**
+• HTML5, CSS3, JavaScript
+• React, Vue.js
+• Windows, Linux
+• Hardware Intel, AMD, NVIDIA`
+      },
+      prazo: {
+        keywords: ['prazo', 'tempo', 'duração', 'quando fica pronto', 'entrega', 'deadline', 'montagem', 'formatação'],
+        response: `Nossos prazos de entrega e execução:
+
+⚡ **Serviços Rápidos**
+• **Formatação**: 2 a 4 horas
+• **Limpeza**: 1 a 2 horas
+• **Diagnóstico**: 30 minutos a 1 hora
+• **Reparo simples**: 1 a 3 horas
+
+🖥️ **Montagem de Computadores**
+• **Computador Básico**: 1 a 2 dias úteis
+• **Computador Gamer**: 2 a 3 dias úteis
+• **Computador Profissional**: 2 a 4 dias úteis
+• **Montagem + Formatação**: Serviço incluso no prazo
+
+🛒 **Comercialização de Hardware**
+• **Produtos em estoque**: Entrega imediata
+• **Produtos sob encomenda**: 3 a 7 dias úteis
+• **Entrega**: 1 a 2 dias úteis
+
+🌐 **Desenvolvimento Web**
+• **Sites Simples**: 1 a 2 semanas
+• **Sites Complexos**: 2 a 4 semanas
+
+**Fatores que influenciam o prazo:**
+• Complexidade do serviço solicitado
+• Disponibilidade de peças e componentes
+• Agendamento de horário disponível
+• Testes de qualidade e funcionamento`
+      },
+      
+      // NOVAS CATEGORIAS TÉCNICAS
+      pagamento: {
+        keywords: ['pagamento', 'pix', 'cartão', 'boleto', 'dinheiro', 'parcelado', 'crédito', 'débito', 'forma de pagamento'],
+        response: `💳 **Formas de Pagamento Aceitas**
+
+**Métodos Disponíveis:**
+
+📱 **PIX**
+• Pagamento instantâneo
+• Método preferencial
+• Transferência imediata
+
+💳 **Cartão de Débito**
+• Pagamento à vista
+• Desconto automático da conta
+• Aceito em todos os serviços
+
+💳 **Cartão de Crédito**
+• Parcelado em até 12x
+• Consulte condições específicas
+• Flexibilidade de pagamento
+
+🏦 **Boleto Bancário**
+• Vencimento em até 3 dias úteis
+• Pagamento em qualquer banco
+• Comprovante de pagamento
+
+💰 **Dinheiro**
+• Pagamento à vista
+• Aceito para todos os serviços
+• Desconto para pagamento em dinheiro
+
+**Informações Importantes:**
+• Todos os métodos são seguros e confiáveis
+• Orçamento gratuito antes do pagamento
+• Comprovante de pagamento fornecido`
+      },
+      
+      limpeza: {
+        keywords: ['limpeza', 'limpar', 'manutenção', 'preventiva', 'poeira', 'aquecimento', 'superaquecimento', 'ventilador'],
+        response: `🧹 **Importância da Limpeza de Computadores**
+
+**Por que é fundamental:**
+• **Previne superaquecimento** - Poeira bloqueia ventiladores e dissipadores
+• **Aumenta a vida útil** - Componentes duram mais quando bem ventilados
+• **Melhora performance** - Temperatura ideal = melhor funcionamento
+• **Evita danos** - Superaquecimento pode queimar componentes
+
+**Componentes que precisam de limpeza:**
+• Ventiladores (CPU, GPU, gabinete)
+• Dissipadores de calor
+• Filtros de poeira
+• Placa-mãe e componentes
+• Fonte de alimentação
+
+**Frequência recomendada:**
+• **Uso doméstico**: A cada 6 meses
+• **Uso intensivo**: A cada 3 meses
+• **Ambiente com poeira**: A cada 2 meses
+
+**Sinais de que precisa limpeza:**
+• Computador muito quente
+• Ventiladores fazendo muito barulho
+• Travamentos frequentes
+• Desligamentos inesperados`
+      },
+      
+      memoria: {
+        keywords: ['memória', 'ram', 'ddr', 'gb', 'giga', 'memória ram', 'capacidade', 'velocidade'],
+        response: `🧠 **Memória RAM - Informações Técnicas**
+
+**O que é a RAM:**
+A RAM (Random Access Memory) é a memória de trabalho do computador, onde os programas e dados ficam armazenados temporariamente durante o uso.
+
+**Para que serve:**
+• **Armazenamento temporário** - Dados que estão sendo processados
+• **Velocidade de acesso** - Muito mais rápida que o HD/SSD
+• **Multitarefa** - Permite rodar vários programas simultaneamente
+• **Cache do sistema** - Acelera operações frequentes
+
+**Tipos de RAM:**
+• **DDR3** - Mais antiga, ainda funcional
+• **DDR4** - Padrão atual, boa performance
+• **DDR5** - Mais nova, máxima velocidade
+
+**Capacidades recomendadas:**
+• **4GB** - Uso básico (navegação, documentos)
+• **8GB** - Uso intermediário (múltiplas abas, programas)
+• **16GB** - Uso avançado (jogos, edição, desenvolvimento)
+• **32GB+** - Uso profissional (renderização, máquinas virtuais)
+
+**Como verificar sua RAM:**
+Windows: Ctrl + Shift + Esc → Performance → Memória
+Mac: Apple Menu → Sobre este Mac`
+      },
+      
+      processador: {
+        keywords: ['processador', 'cpu', 'intel', 'amd', 'ryzen', 'core', 'núcleos', 'ghz'],
+        response: `🖥️ **Processador (CPU) - Informações Técnicas**
+
+**O que é o processador:**
+O processador (CPU - Central Processing Unit) é o cérebro do computador, responsável por processar todas as informações e executar programas.
+
+**Para que serve:**
+• **Processamento de dados** - Executa cálculos e operações
+• **Controle do sistema** - Gerencia todos os componentes
+• **Execução de programas** - Roda aplicativos e jogos
+• **Multitarefa** - Permite usar vários programas simultaneamente
+
+**Principais fabricantes:**
+• **Intel**: Core i3, i5, i7, i9 (básico ao avançado)
+• **AMD**: Ryzen 3, 5, 7, 9 (equivalente Intel)
+
+**Características importantes:**
+• **Núcleos**: Mais núcleos = melhor multitarefa
+• **Frequência**: GHz mais alto = mais velocidade
+• **Cache**: Memória interna para dados frequentes
+• **Socket**: Tipo de conexão com a placa-mãe
+
+**Como verificar seu processador:**
+Windows: Ctrl + Shift + Esc → Performance → CPU
+Mac: Apple Menu → Sobre este Mac`
+      },
+      
+      placa_video: {
+        keywords: ['placa de vídeo', 'gpu', 'nvidia', 'amd', 'gtx', 'rtx', 'rx', 'gráficos'],
+        response: `🎮 **Placa de Vídeo (GPU) - Informações Técnicas**
+
+**O que é a placa de vídeo:**
+A placa de vídeo (GPU - Graphics Processing Unit) é responsável por processar e exibir imagens na tela do computador.
+
+**Para que serve:**
+• **Processamento gráfico** - Renderiza imagens e vídeos
+• **Jogos** - Essencial para jogos modernos
+• **Edição de vídeo** - Acelera renderização
+• **Design gráfico** - Melhora performance em softwares de design
+
+**Tipos de placa de vídeo:**
+• **Integrada**: Vem junto com o processador (básica)
+• **Dedicada**: Placa separada (mais potente)
+
+**Principais fabricantes:**
+• **NVIDIA**: GTX (gaming), RTX (gaming avançado), Quadro (profissional)
+• **AMD**: RX (gaming), Radeon Pro (profissional)
+
+**Características importantes:**
+• **Memória VRAM**: Mais memória = melhor performance
+• **Clock**: Velocidade de processamento
+• **Resfriamento**: Ventilador ou líquido
+• **Consumo**: Potência elétrica necessária
+
+**Como verificar sua placa de vídeo:**
+Windows: Ctrl + Shift + Esc → Performance → GPU
+Mac: Apple Menu → Sobre este Mac`
+      },
+      
+      armazenamento: {
+        keywords: ['armazenamento', 'hd', 'ssd', 'disco', 'nvme', 'm.2', 'giga', 'terabyte'],
+        response: `💾 **Armazenamento - Informações Técnicas**
+
+**O que é o armazenamento:**
+O armazenamento é onde ficam guardados todos os arquivos, programas e sistema operacional do computador.
+
+**Para que serve:**
+• **Armazenar arquivos** - Documentos, fotos, vídeos
+• **Instalar programas** - Aplicativos e jogos
+• **Sistema operacional** - Windows, Linux, macOS
+• **Backup de dados** - Cópias de segurança
+
+**Tipos de armazenamento:**
+• **HD (HDD)**: Disco rígido tradicional
+  - Mais barato e maior capacidade
+  - Mais lento e mecânico
+  
+• **SSD**: Disco de estado sólido
+  - Mais rápido e silencioso
+  - Mais caro e menor capacidade
+  
+• **NVMe**: SSD de alta velocidade
+  - Máxima velocidade de transferência
+  - Formato M.2
+
+**Capacidades comuns:**
+• **256GB**: Sistema operacional e programas básicos
+• **512GB**: Uso intermediário
+• **1TB**: Uso avançado
+• **2TB+**: Uso profissional
+
+**Como verificar seu armazenamento:**
+Windows: Este PC → Propriedades
+Mac: Apple Menu → Sobre este Mac`
+      },
+      
+      fonte: {
+        keywords: ['fonte', 'alimentação', 'energia', 'watts', 'w', 'certificação', '80 plus'],
+        response: `🔌 **Fonte de Alimentação - Informações Técnicas**
+
+**O que é a fonte de alimentação:**
+A fonte de alimentação é responsável por fornecer energia elétrica para todos os componentes do computador.
+
+**Para que serve:**
+• **Fornecer energia** - Alimenta todos os componentes
+• **Converter tensão** - Transforma 110V/220V em tensões adequadas
+• **Proteger componentes** - Evita danos por variações elétricas
+• **Estabilizar corrente** - Mantém energia constante
+
+**Potência necessária:**
+• **300-400W**: Computador básico
+• **500-600W**: Computador intermediário
+• **700-850W**: Computador gamer
+• **1000W+**: Computador profissional
+
+**Certificações de eficiência:**
+• **80 Plus Bronze**: Eficiência básica
+• **80 Plus Silver**: Eficiência intermediária
+• **80 Plus Gold**: Eficiência alta
+• **80 Plus Platinum**: Eficiência máxima
+
+**Tipos de fonte:**
+• **Não modular**: Cabos fixos
+• **Semi-modular**: Alguns cabos removíveis
+• **Modular**: Todos os cabos removíveis
+
+**Como verificar sua fonte:**
+Abrir o gabinete e verificar a etiqueta da fonte`
+      },
+      
+      hardware: {
+        keywords: ['hardware', 'componentes', 'peças', 'partes do computador'],
+        response: `⚙️ **Componentes de Hardware - Visão Geral**
+
+**Principais componentes de um computador:**
+
+**🖥️ Processador (CPU)**
+O cérebro do computador, responsável por processar todas as informações e executar programas.
+
+**🧠 Memória RAM**
+Memória de trabalho temporária onde os programas ficam armazenados durante o uso.
+
+**🎮 Placa de Vídeo (GPU)**
+Responsável por processar e exibir imagens na tela, essencial para jogos e edição.
+
+**💾 Armazenamento (HD/SSD)**
+Onde ficam armazenados todos os arquivos, programas e sistema operacional.
+
+**🔌 Fonte de Alimentação**
+Fornece energia elétrica para todos os componentes do computador.
+
+**📦 Gabinete**
+Caixa que protege e organiza todos os componentes internos.
+
+**🖥️ Placa-mãe**
+Conecta e permite comunicação entre todos os componentes.
+
+Cada componente tem uma função específica e trabalha em conjunto para o funcionamento do computador.`
+      },
+      
+      sistema: {
+        keywords: ['sistema', 'windows', 'linux', 'mac', 'operacional', 'versão', 'atualização', 'compatibilidade'],
+        response: `🖥️ **Sistemas Operacionais - Comparação**
+
+**Windows 10/11**
+✅ **Vantagens:**
+• Compatibilidade máxima com programas
+• Interface familiar
+• Suporte a jogos
+• Drivers fáceis de encontrar
+
+❌ **Desvantagens:**
+• Mais vulnerável a vírus
+• Pode ser lento em PCs antigos
+• Atualizações automáticas
+
+**Linux (Ubuntu, Mint, etc.)**
+✅ **Vantagens:**
+• Gratuito e open-source
+• Muito seguro
+• Leve e rápido
+• Ideal para programação
+
+❌ **Desvantagens:**
+• Menos jogos compatíveis
+• Curva de aprendizado
+• Alguns programas não funcionam
+
+**macOS (apenas Macs)**
+✅ **Vantagens:**
+• Interface elegante
+• Muito seguro
+• Integração perfeita com outros produtos Apple
+• Ótimo para design e edição
+
+❌ **Desvantagens:**
+• Limitado a hardware Apple
+• Mais caro
+• Menos jogos
+
+**Recomendações por uso:**
+• **Gaming**: Windows 10/11
+• **Trabalho/Estudo**: Windows ou Linux
+• **Programação**: Linux ou macOS
+• **Design/Edição**: macOS ou Windows
+• **Uso básico**: Qualquer um
+
+**Requisitos mínimos Windows 11:**
+• 4GB RAM
+• 64GB armazenamento
+• Processador 1GHz dual-core
+• TPM 2.0`
+      },
+      
+      upgrade: {
+        keywords: ['upgrade', 'melhorar', 'atualizar', 'trocar', 'componente', 'performance', 'lento', 'velocidade'],
+        response: `🚀 **Upgrade de Computador - Melhorias de Performance**
+
+**Prioridades para upgrade (ordem de impacto):**
+
+1. **💾 SSD (Maior impacto)**
+   • Trocar HD por SSD = 5x mais rápido
+   • Sistema inicializa em segundos
+   • Programas abrem instantaneamente
+   • Custo-benefício excelente
+
+2. **🧠 RAM**
+   • 4GB → 8GB = Melhora multitarefa
+   • 8GB → 16GB = Ideal para jogos/edição
+   • Verificar compatibilidade da placa-mãe
+
+3. **🖥️ Processador**
+   • Upgrade mais complexo
+   • Pode precisar trocar placa-mãe
+   • Verificar socket compatível
+
+4. **🎮 Placa de Vídeo**
+   • Essencial para jogos
+   • Verificar potência da fonte
+   • Considerar espaço no gabinete
+
+**Sinais de que precisa upgrade:**
+• Computador muito lento
+• Travamentos frequentes
+• Não roda programas novos
+• Barulho excessivo do HD
+
+**Upgrades mais comuns:**
+• **PC antigo**: SSD + RAM
+• **Gaming**: Placa de vídeo + RAM
+• **Trabalho**: SSD + RAM + Processador
+
+**Custo aproximado:**
+• SSD 240GB: R$ 150-250
+• RAM 8GB: R$ 200-350
+• Placa de vídeo básica: R$ 800-1500`
+      },
+      
+      problemas: {
+        keywords: ['problema', 'erro', 'travando', 'lento', 'não liga', 'tela azul', 'vírus', 'malware', 'diagnóstico'],
+        response: `🔧 **Problemas Comuns e Soluções**
+
+**🖥️ Computador muito lento:**
+• **Causas**: Pouca RAM, HD cheio, vírus, superaquecimento
+• **Soluções**: Limpeza, mais RAM, SSD, antivírus
+
+**💻 Não liga:**
+• **Causas**: Fonte queimada, placa-mãe, botão power
+• **Soluções**: Testar fonte, verificar cabos, trocar fonte
+
+**🖥️ Tela azul (BSOD):**
+• **Causas**: Drivers, RAM, superaquecimento, vírus
+• **Soluções**: Atualizar drivers, testar RAM, limpeza
+
+**🦠 Vírus/Malware:**
+• **Sinais**: Pop-ups, lentidão, programas estranhos
+• **Soluções**: Antivírus, Windows Defender, formatação
+
+**🔥 Superaquecimento:**
+• **Sinais**: Desligamentos, barulho de ventilador
+• **Soluções**: Limpeza, pasta térmica, ventiladores
+
+**📱 Tela congelada:**
+• **Causas**: Pouca RAM, programa travado, superaquecimento
+• **Soluções**: Ctrl+Alt+Del, reiniciar, mais RAM
+
+**🔊 Sem som:**
+• **Causas**: Drivers, cabo, placa de som
+• **Soluções**: Atualizar drivers, verificar cabos
+
+**📶 Sem internet:**
+• **Causas**: Driver Wi-Fi, roteador, cabo
+• **Soluções**: Reiniciar roteador, verificar drivers
+
+**Diagnóstico profissional:**
+• Análise completa do sistema
+• Identificação precisa do problema
+• Orçamento detalhado
+• Garantia do serviço`
+      }
+    };
+
+    // Função para calcular relevância de uma resposta baseada na pergunta
+    function calculateRelevance(userMessage, keywords) {
+      const message = userMessage.toLowerCase();
+      let score = 0;
+      
+      // Verificar cada palavra-chave
+      for (const keyword of keywords) {
+        if (message.includes(keyword.toLowerCase())) {
+          score += 1;
+        }
+      }
+      
+      // Bônus para correspondências exatas
+      for (const keyword of keywords) {
+        if (message === keyword.toLowerCase()) {
+          score += 2;
+        }
+      }
+      
+      // Bônus para palavras-chave mais específicas
+      const specificKeywords = ['ram', 'ssd', 'windows', 'linux', 'upgrade', 'limpeza', 'problema'];
+      for (const specific of specificKeywords) {
+        if (message.includes(specific)) {
+          score += 0.5;
+        }
+      }
+      
+      return score;
+    }
+
+    // Função para rastrear pesquisa do usuário
+    function trackUserSearch(userMessage) {
+      searchCount++;
+      userSearchHistory.push({
+        message: userMessage.toLowerCase(),
+        timestamp: Date.now(),
+        searchNumber: searchCount
+      });
+      
+      // Manter apenas as últimas 20 pesquisas
+      if (userSearchHistory.length > 20) {
+        userSearchHistory.shift();
+      }
+      
+      // Atualizar pesos das categorias baseado no histórico
+      updateCategoryWeights();
+    }
+
+    // Função para atualizar pesos das categorias baseado no histórico
+    function updateCategoryWeights() {
+      // Resetar pesos
+      categoryWeights = {};
+      
+      // Analisar histórico de pesquisas
+      userSearchHistory.forEach((search, index) => {
+        const recency = (index + 1) / userSearchHistory.length; // Pesquisas mais recentes têm peso maior
+        
+        // Calcular relevância para cada categoria
+        for (const [category, data] of Object.entries(knowledgeBase)) {
+          const relevance = calculateRelevance(search.message, data.keywords);
+          if (relevance > 0) {
+            if (!categoryWeights[category]) {
+              categoryWeights[category] = 0;
+            }
+            // Peso baseado na relevância e recência
+            categoryWeights[category] += relevance * recency;
+          }
+        }
+      });
+    }
+
+    // Função para obter categorias mais relevantes baseadas no histórico
+    function getRelevantCategoriesFromHistory() {
+      const sortedCategories = Object.entries(categoryWeights)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 4)
+        .map(item => item[0]);
+      
+      return sortedCategories;
+    }
+
+    // Função para encontrar as melhores respostas baseadas na pergunta
+    function findBestResponses(userMessage, maxResults = 4) {
+      const message = userMessage.toLowerCase();
+      const results = [];
+      
+      // Verificar primeiro se há uma resposta específica nas respostas extras
+      for (const [question, data] of Object.entries(extraResponses)) {
+        if (message.includes(question.toLowerCase()) || question.toLowerCase().includes(message)) {
+          return [{
+            category: 'extra',
+            response: data.response,
+            relevance: 10 // Alta relevância para respostas específicas
+          }];
+        }
+      }
+      
+      // Calcular relevância para cada categoria
+      for (const [category, data] of Object.entries(knowledgeBase)) {
+        const relevance = calculateRelevance(message, data.keywords);
+        if (relevance > 0) {
+          results.push({
+            category: category,
+            response: data.response,
+            relevance: relevance
+          });
+        }
+      }
+      
+      // Ordenar por relevância (maior primeiro)
+      results.sort((a, b) => b.relevance - a.relevance);
+      
+      // Retornar apenas as top 4 respostas
+      const topResults = results.slice(0, maxResults);
+      
+      // Se não encontrou nenhuma resposta relevante
+      if (topResults.length === 0) {
+        return [{
+          category: 'default',
+          response: `Interessante pergunta! 🤔
+
+Como Luna, assistente virtual da Byte Sync Informatic, posso auxiliá-lo com:
+
+**💻 Serviços de Tecnologia da Informação:**
+• Montagem de computadores
+• Formatação e instalação de sistemas operacionais
+• Limpeza e manutenção preventiva
+• Reparo e diagnóstico técnico de problemas
+
+**🛒 Hardware e Periféricos:**
+• Comercialização de processadores, memórias, HDs e SSDs
+• Placas de vídeo, fontes de alimentação, gabinetes
+• Mouses, teclados, headsets, monitores
+• Explicações técnicas sobre componentes
+
+**🌐 Desenvolvimento Web:**
+• Sites responsivos e modernos
+• Desenvolvimento front-end
+• Otimização de performance
+
+**📞 Contato e Orçamentos:**
+• Formas de contato disponíveis
+• Preços e prazos de serviços
+• Agendamento de atendimento
+
+Por favor, formule uma pergunta mais específica ou utilize os botões de ação rápida disponíveis acima! 😊`,
+          relevance: 0
+        }];
+      }
+      
+      return topResults;
+    }
+
+    // Função para gerar botões de ação rápida dinâmicos
+    function generateQuickActions(category = null) {
+      // Se não há categoria específica, mostrar botões principais
+      if (!category) {
+        return [
+          {
+            text: 'Serviços',
+            question: 'Quais serviços vocês oferecem?'
+          },
+          {
+            text: 'Preços',
+            question: 'Tabela de preços'
+          },
+          {
+            text: 'Pagamento',
+            question: 'Formas de pagamento'
+          },
+          {
+            text: 'Contato',
+            question: 'Como entrar em contato?'
+          }
+        ];
+      }
+
+      // Adicionar botão "Voltar ao Início" em todas as categorias secundárias
+      const backToHome = {
+        text: '🏠 Início',
+        question: 'Voltar ao menu principal'
+      };
+
+      // Sugestões específicas por categoria
+      const categorySuggestions = {
+        'servicos': [
+          { text: 'Montagem', question: 'Como funciona a montagem de computadores?' },
+          { text: 'Formatação', question: 'Serviços de formatação' },
+          { text: 'Limpeza', question: 'Importância da limpeza de computadores' },
+          { text: 'Reparo', question: 'Serviços de reparo e diagnóstico' },
+          backToHome
+        ],
+        'precos': [
+          { text: 'Manutenção', question: 'Preços de serviços de manutenção' },
+          { text: 'Montagem', question: 'Preços de montagem de computadores' },
+          { text: 'Hardware', question: 'Preços de hardware e periféricos' },
+          { text: 'Pagamento', question: 'Formas de pagamento' },
+          backToHome
+        ],
+        'pagamento': [
+          { text: 'PIX', question: 'Pagamento via PIX' },
+          { text: 'Cartão', question: 'Pagamento com cartão' },
+          { text: 'Boleto', question: 'Pagamento via boleto' },
+          { text: 'Preços', question: 'Tabela de preços' },
+          backToHome
+        ],
+        'contato': [
+          { text: 'WhatsApp', question: 'Contato via WhatsApp' },
+          { text: 'Instagram', question: 'Contato via Instagram' },
+          { text: 'GitHub', question: 'Ver projetos no GitHub' },
+          { text: 'Serviços', question: 'Quais serviços vocês oferecem?' },
+          backToHome
+        ],
+        'hardware': [
+          { text: 'Processador', question: 'O que é um processador?' },
+          { text: 'RAM', question: 'O que é memória RAM?' },
+          { text: 'Placa de Vídeo', question: 'O que é uma placa de vídeo?' },
+          { text: 'Armazenamento', question: 'Tipos de armazenamento' },
+          backToHome
+        ],
+        'limpeza': [
+          { text: 'Frequência', question: 'Com que frequência limpar o computador?' },
+          { text: 'Componentes', question: 'Quais componentes precisam de limpeza?' },
+          { text: 'Sinais', question: 'Sinais de que precisa limpeza' },
+          { text: 'Serviços', question: 'Serviços de limpeza profissional' },
+          backToHome
+        ],
+        'sistema': [
+          { text: 'Windows', question: 'Sobre o Windows' },
+          { text: 'Linux', question: 'Sobre o Linux' },
+          { text: 'macOS', question: 'Sobre o macOS' },
+          { text: 'Formatação', question: 'Serviços de formatação' },
+          backToHome
+        ],
+        'upgrade': [
+          { text: 'SSD', question: 'Upgrade para SSD' },
+          { text: 'RAM', question: 'Upgrade de memória RAM' },
+          { text: 'Processador', question: 'Upgrade de processador' },
+          { text: 'Placa de Vídeo', question: 'Upgrade de placa de vídeo' },
+          backToHome
+        ],
+        'problemas': [
+          { text: 'Lento', question: 'Computador muito lento' },
+          { text: 'Não Liga', question: 'Computador não liga' },
+          { text: 'Tela Azul', question: 'Tela azul de erro' },
+          { text: 'Vírus', question: 'Problemas com vírus' },
+          backToHome
+        ]
+      };
+
+      return categorySuggestions[category] || generateQuickActions();
+    }
+
+    // Adicionar algumas respostas específicas para as opções extras
+    const extraResponses = {
+      'Como funciona o processo de montagem?': {
+        response: `🔧 **Processo de Montagem de Computadores**
+
+**1. Análise de Necessidades**
+• Entendimento do uso pretendido (gaming, trabalho, estudo)
+• Definição do orçamento disponível
+• Escolha dos componentes adequados
+
+**2. Seleção de Componentes**
+• Processador compatível com a placa-mãe
+• Memória RAM adequada ao uso
+• Placa de vídeo para jogos/edição
+• Armazenamento (SSD + HD)
+• Fonte de alimentação adequada
+
+**3. Montagem Profissional**
+• Instalação cuidadosa de todos os componentes
+• Organização dos cabos para melhor ventilação
+• Teste de todos os componentes
+• Instalação do sistema operacional
+
+**4. Testes e Configuração**
+• Teste de stress para verificar estabilidade
+• Instalação de drivers atualizados
+• Configuração de BIOS/UEFI
+• Teste de performance
+
+**5. Entrega**
+• Computador pronto para uso
+• Garantia de funcionamento
+• Suporte pós-venda`
+      },
+      'Qual a garantia dos serviços?': {
+        response: `🛡️ **Garantia dos Serviços**
+
+**Garantia de Montagem:**
+• 90 dias para montagem de computadores
+• Cobertura de defeitos de instalação
+• Suporte técnico durante o período
+
+**Garantia de Formatação:**
+• 30 dias para formatação
+• Reinstalação gratuita se necessário
+• Backup de dados incluído
+
+**Garantia de Limpeza:**
+• 15 dias para limpeza
+• Nova limpeza se necessário
+• Verificação de funcionamento
+
+**Garantia de Reparo:**
+• 30 dias para reparos
+• Peças com garantia do fabricante
+• Teste completo após reparo
+
+**Garantia de Hardware:**
+• Garantia original do fabricante
+• Processo de troca facilitado
+• Suporte para acionamento de garantia
+
+**Política de Garantia:**
+• Coberre defeitos de mão de obra
+• Não cobre danos por mau uso
+• Atendimento prioritário para garantia`
+      },
+      'Como solicitar um orçamento?': {
+        response: `📋 **Como Solicitar um Orçamento**
+
+**Formas de Contato:**
+📱 **WhatsApp**: (11) 93052-2075
+📸 **Instagram**: @bytesyncinformatic
+🎵 **TikTok**: @bytesyncinformatic
+
+**Informações Necessárias:**
+• Tipo de serviço desejado
+• Especificações do equipamento (se aplicável)
+• Orçamento disponível
+• Prazo desejado
+• Localização para atendimento
+
+**Processo do Orçamento:**
+1. **Contato inicial** - Descreva sua necessidade
+2. **Análise técnica** - Avaliação do equipamento/serviço
+3. **Proposta detalhada** - Orçamento com especificações
+4. **Aprovação** - Confirmação do cliente
+5. **Agendamento** - Definição de data e horário
+
+**Tipos de Orçamento:**
+• **Orçamento gratuito** para todos os serviços
+• **Orçamento presencial** quando necessário
+• **Orçamento por foto/vídeo** para diagnósticos
+• **Orçamento express** para emergências
+
+**Vantagens:**
+• Sem compromisso
+• Resposta rápida
+• Especificações detalhadas
+• Garantia incluída`
+      }
+    };
+
+    // Função para voltar ao menu principal
+    function goToMainMenu() {
+      updateQuickActions(); // Volta aos botões principais
+      addMessage(`🏠 **Menu Principal**
+
+Bem-vindo de volta! Como posso ajudá-lo hoje, Luna?
+
+**💻 Serviços de Tecnologia da Informação:**
+• Montagem de computadores
+• Formatação e instalação de sistemas operacionais
+• Limpeza e manutenção preventiva
+• Reparo e diagnóstico técnico de problemas
+
+**🛒 Hardware e Periféricos:**
+• Comercialização de processadores, memórias, HDs e SSDs
+• Placas de vídeo, fontes de alimentação, gabinetes
+• Mouses, teclados, headsets, monitores
+• Explicações técnicas sobre componentes
+
+**🌐 Desenvolvimento Web:**
+• Sites responsivos e modernos
+• Desenvolvimento front-end
+• Otimização de performance
+
+**📞 Contato e Orçamentos:**
+• Formas de contato disponíveis
+• Preços e prazos de serviços
+• Agendamento de atendimento
+
+Escolha uma das opções acima ou faça sua pergunta! 😊`);
+      
+      // Adicionar pergunta de avaliação após 1 segundo
+      setTimeout(() => {
+        showEvaluationQuestion();
+      }, 1000);
+    }
+
+    // Função para mostrar pergunta de avaliação
+    function showEvaluationQuestion() {
+      const evaluationMessage = document.createElement('div');
+      evaluationMessage.className = 'message assistant evaluation-question';
+      evaluationMessage.innerHTML = `
+        <div style="margin-bottom: 10px;">
+          <strong>🤔 Consegui esclarecer sua dúvida?</strong>
+        </div>
+        <div class="evaluation-buttons">
+          <button class="eval-btn eval-yes" onclick="handleEvaluation('yes')">✅ Sim</button>
+          <button class="eval-btn eval-no" onclick="handleEvaluation('no')">❌ Não</button>
+        </div>
+      `;
+      chatMessages.appendChild(evaluationMessage);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Adicionar event listeners para prevenir propagação
+      const evalButtons = evaluationMessage.querySelectorAll('.eval-btn');
+      evalButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      });
+    }
+
+    // Função para lidar com a avaliação
+    function handleEvaluation(response) {
+      // Remover botões de avaliação
+      const evaluationQuestion = document.querySelector('.evaluation-question');
+      if (evaluationQuestion) {
+        evaluationQuestion.remove();
+      }
+
+      if (response === 'yes') {
+        addMessage(`🎉 **Ótimo!** Fico feliz em ter ajudado!
+
+Se precisar de mais alguma coisa, estou aqui para auxiliá-lo. 😊`, false);
+      } else {
+        // Se escolheu "Não", oferecer mais opções relacionadas
+        showMoreOptions();
+      }
+    }
+
+    // Função para mostrar mais opções quando a resposta não foi satisfatória
+    function showMoreOptions() {
+      // Obter a última categoria respondida
+      const lastCategory = getLastResponseCategory();
+      
+      addMessage(`🤝 **Entendo!** Vou tentar ajudar melhor.
+
+Aqui estão mais opções relacionadas ao assunto:`, false);
+      
+      // Mostrar opções específicas baseadas na categoria
+      const moreOptions = getMoreOptionsForCategory(lastCategory);
+      updateQuickActionsWithOptions(moreOptions);
+    }
+
+    // Função para obter a última categoria respondida
+    function getLastResponseCategory() {
+      // Buscar na base de conhecimento qual categoria foi usada na última resposta
+      // Por simplicidade, vamos usar uma variável global para rastrear
+      return window.lastResponseCategory || 'default';
+    }
+
+    // Função para obter mais opções baseadas na categoria
+    function getMoreOptionsForCategory(category) {
+      const moreOptions = {
+        'servicos': [
+          { text: 'Detalhes Montagem', question: 'Como funciona o processo de montagem?' },
+          { text: 'Garantia', question: 'Qual a garantia dos serviços?' },
+          { text: 'Prazo', question: 'Qual o prazo de entrega?' },
+          { text: 'Orçamento', question: 'Como solicitar um orçamento?' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'precos': [
+          { text: 'Descontos', question: 'Vocês oferecem descontos?' },
+          { text: 'Parcelamento', question: 'Formas de parcelamento' },
+          { text: 'Orçamento', question: 'Como solicitar um orçamento?' },
+          { text: 'Comparativo', question: 'Comparativo de preços' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'pagamento': [
+          { text: 'Segurança', question: 'Segurança dos pagamentos' },
+          { text: 'Comprovante', question: 'Comprovante de pagamento' },
+          { text: 'Reembolso', question: 'Política de reembolso' },
+          { text: 'Orçamento', question: 'Como solicitar um orçamento?' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'contato': [
+          { text: 'Horário', question: 'Horário de atendimento' },
+          { text: 'Localização', question: 'Localização da empresa' },
+          { text: 'Urgência', question: 'Contato para emergências' },
+          { text: 'Agendamento', question: 'Como agendar um serviço?' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'hardware': [
+          { text: 'Compatibilidade', question: 'Como verificar compatibilidade?' },
+          { text: 'Performance', question: 'Como escolher hardware?' },
+          { text: 'Marcas', question: 'Quais marcas vocês trabalham?' },
+          { text: 'Garantia', question: 'Garantia dos produtos' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'limpeza': [
+          { text: 'Produtos', question: 'Quais produtos usam na limpeza?' },
+          { text: 'Preventiva', question: 'Dicas de manutenção preventiva' },
+          { text: 'Agendamento', question: 'Como agendar uma limpeza?' },
+          { text: 'Urgência', question: 'Limpeza de emergência' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'sistema': [
+          { text: 'Migração', question: 'Como migrar de sistema?' },
+          { text: 'Backup', question: 'Backup antes da formatação' },
+          { text: 'Drivers', question: 'Instalação de drivers' },
+          { text: 'Segurança', question: 'Dicas de segurança' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'upgrade': [
+          { text: 'Diagnóstico', question: 'Diagnóstico para upgrade' },
+          { text: 'Orçamento', question: 'Orçamento de upgrade' },
+          { text: 'Compatibilidade', question: 'Verificar compatibilidade' },
+          { text: 'Performance', question: 'Melhorias de performance' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'problemas': [
+          { text: 'Diagnóstico', question: 'Diagnóstico profissional' },
+          { text: 'Urgência', question: 'Problemas urgentes' },
+          { text: 'Prevenção', question: 'Como prevenir problemas?' },
+          { text: 'Garantia', question: 'Garantia de reparo' },
+          { text: '🏠 Início', question: 'Voltar ao menu principal' }
+        ],
+        'default': [
+          { text: 'Serviços', question: 'Quais serviços vocês oferecem?' },
+          { text: 'Preços', question: 'Tabela de preços' },
+          { text: 'Pagamento', question: 'Formas de pagamento' },
+          { text: 'Contato', question: 'Como entrar em contato?' }
+        ]
+      };
+
+      return moreOptions[category] || moreOptions['default'];
+    }
+
+    // Função para atualizar botões com opções específicas
+    function updateQuickActionsWithOptions(options) {
+      const quickActionsContainer = document.querySelector('.quick-actions');
+      
+      // Limpar botões existentes
+      quickActionsContainer.innerHTML = '';
+      
+      // Adicionar novas opções
+      options.forEach(action => {
+        const button = document.createElement('button');
+        button.className = 'quick-action-btn';
+        button.textContent = action.text;
+        button.onclick = (e) => {
+          e.stopPropagation();
+          sendQuickMessage(action.question);
+        };
+        quickActionsContainer.appendChild(button);
+      });
+    }
+
+          // Função para obter nome de exibição da categoria
+      function getCategoryDisplayName(category) {
+        const displayNames = {
+          'servicos': 'Serviços',
+          'contato': 'Contato',
+          'tecnologias': 'Tecnologias',
+          'precos': 'Preços',
+          'pagamento': 'Pagamento',
+          'limpeza': 'Limpeza',
+          'memoria': 'RAM',
+          'hardware': 'Hardware',
+          'processador': 'Processador',
+          'placa_video': 'Placa de Vídeo',
+          'armazenamento': 'Armazenamento',
+          'fonte': 'Fonte',
+          'sistema': 'Sistema',
+          'upgrade': 'Upgrade',
+          'problemas': 'Problemas'
+        };
+        return displayNames[category] || category;
+      }
+
+    // Função para adicionar mensagem ao chat
+    function addMessage(message, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+      messageDiv.innerHTML = message;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Função para mostrar indicador de digitação
+    function showTyping() {
+      typingIndicator.classList.add('show');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Função para esconder indicador de digitação
+    function hideTyping() {
+      typingIndicator.classList.remove('show');
+    }
+
+    // Função para simular resposta da IA
+    function simulateAIResponse(userMessage) {
+      showTyping();
+      
+      // Simular tempo de processamento
+      setTimeout(() => {
+        hideTyping();
+        const responses = findBestResponses(userMessage, 1); // Apenas 1 resposta
+        
+        // Resposta única
+        addMessage(responses[0].response);
+        
+        // Atualizar botões baseado na categoria da resposta
+        const category = responses[0].category;
+        updateQuickActions(category);
+        
+        // Rastrear a categoria da última resposta para uso posterior
+        window.lastResponseCategory = category;
+        
+        // Adicionar pergunta de avaliação após 1 segundo (exceto para mensagem inicial)
+        if (!userMessage.includes('Voltar ao menu principal')) {
+          setTimeout(() => {
+            showEvaluationQuestion();
+          }, 1000);
+        }
+      }, 1000 + Math.random() * 2000); // 1-3 segundos
+    }
+
+    // Função para enviar mensagem
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (!message) return;
+      
+      // Rastrear pesquisa do usuário
+      trackUserSearch(message);
+      
+      // Adicionar mensagem do usuário
+      addMessage(message, true);
+      chatInput.value = '';
+      
+      // Simular resposta da IA
+      simulateAIResponse(message);
+    }
+
+    // Função para atualizar botões de ação rápida dinâmicos
+    function updateQuickActions(category = null) {
+      const quickActionsContainer = document.querySelector('.quick-actions');
+      const quickActions = generateQuickActions(category);
+      
+      // Limpar botões existentes
+      quickActionsContainer.innerHTML = '';
+      
+      // Adicionar botões baseados na categoria
+      quickActions.forEach(action => {
+        const button = document.createElement('button');
+        button.className = 'quick-action-btn';
+        button.textContent = action.text;
+        button.onclick = (e) => {
+          e.stopPropagation();
+          sendQuickMessage(action.question);
+        };
+        quickActionsContainer.appendChild(button);
+      });
+    }
+
+    // Função para enviar mensagem rápida
+    function sendQuickMessage(message) {
+      // Verificar se é para voltar ao menu principal
+      if (message === 'Voltar ao menu principal') {
+        addMessage(message, true);
+        goToMainMenu();
+        return;
+      }
+      
+      // Rastrear pesquisa do usuário
+      trackUserSearch(message);
+      
+      addMessage(message, true);
+      simulateAIResponse(message);
+    }
+
+    // Event listeners para o chat
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Event listener para o botão de enviar
+    sendBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sendMessage();
+    });
+
+    // Desabilitar botão quando input estiver vazio
+    chatInput.addEventListener('input', () => {
+      sendBtn.disabled = !chatInput.value.trim();
+    });
+
+    // Focar no input quando a assistente abrir
+    assistantToggle.addEventListener('click', () => {
+      if (!isAssistantOpen) {
+        setTimeout(() => {
+          chatInput.focus();
+        }, 300);
+      }
+    });
+
+    // Inicializar botões de ação rápida dinâmicos
+    updateQuickActions();
+    
+    // Debug: Mostrar que IA está ativa
+    console.log('IA inicializada com botões dinâmicos');
   </script>
 </body>
 </html>
