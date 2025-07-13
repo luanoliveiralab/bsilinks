@@ -385,6 +385,8 @@
       justify-content: center;
       font-size: 14px;
       transition: all 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .send-btn:hover {
@@ -415,6 +417,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       backdrop-filter: blur(2px);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .quick-action-btn:hover {
@@ -440,6 +444,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       backdrop-filter: blur(2px);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .eval-yes {
@@ -510,64 +516,292 @@
     /* Responsividade */
     @media (max-width: 600px) {
       body {
-        padding: 15px;
+        padding: 10px;
+        font-size: 14px;
       }
 
       .container {
-        padding: 25px 20px;
+        padding: 20px 15px;
         max-width: 100%;
         box-shadow: none;
         backdrop-filter: none;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 8px;
       }
 
       h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
       }
 
       .links a {
-        font-size: 0.95rem;
-        padding: 12px;
+        font-size: 0.9rem;
+        padding: 12px 15px;
+        margin: 8px 0;
+        border-radius: 6px;
       }
 
       .profile-pic {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
+        margin-bottom: 15px;
+        border-width: 2px;
       }
 
+      /* Otimizações da IA para Mobile */
       .assistant-container {
-        bottom: 15px;
-        right: 15px;
+        bottom: 10px;
+        right: 10px;
       }
 
       .assistant-toggle {
-        width: 55px;
-        height: 55px;
-        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        box-shadow: 0 2px 10px rgba(70, 41, 117, 0.5);
+      }
+
+      .assistant-title {
+        right: 65px;
+        bottom: 12px;
+        font-size: 0.85rem;
+        opacity: 0.8;
       }
 
       .assistant-box {
-        width: 280px;
-        right: -10px;
+        width: calc(100vw - 20px);
+        max-width: 320px;
+        right: 0;
+        bottom: 60px;
+        max-height: 70vh;
+        border-radius: 12px;
+      }
+
+      .assistant-header {
+        padding: 12px;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .assistant-header h3 {
+        font-size: 0.9rem;
+      }
+
+      .assistant-content {
+        height: calc(70vh - 60px);
+        max-height: 350px;
+      }
+
+      .chat-messages {
+        padding: 15px 15px 0 15px;
+        max-height: calc(70vh - 140px);
+      }
+
+      .chat-controls {
+        padding: 15px;
+      }
+
+      .message {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+        border-radius: 10px;
+      }
+
+      .message.user {
+        margin-left: 15px;
+      }
+
+      .message.assistant {
+        margin-right: 15px;
+      }
+
+      .quick-actions {
+        gap: 4px;
+        margin-bottom: 8px;
+      }
+
+      .quick-action-btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        border-radius: 12px;
+      }
+
+      .chat-input-container {
+        gap: 6px;
+      }
+
+      .chat-input {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        border-radius: 18px;
+      }
+
+      .send-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+
+      .evaluation-buttons {
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .eval-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        border-radius: 15px;
+      }
+
+      .typing-indicator {
+        padding: 8px 10px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        border-radius: 10px;
+      }
+
+      .typing-dot {
+        width: 5px;
+        height: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .assistant-box {
+        width: calc(100vw - 10px);
+        right: 5px;
+        bottom: 55px;
+      }
+
+      .assistant-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+      }
+
+      .assistant-title {
+        right: 60px;
+        font-size: 0.8rem;
+      }
+
+      .chat-messages {
+        padding: 12px 12px 0 12px;
+      }
+
+      .chat-controls {
+        padding: 12px;
+      }
+
+      .message {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+      }
+
+      .quick-action-btn {
+        padding: 4px 8px;
+        font-size: 0.65rem;
       }
     }
 
     @media (max-width: 360px) {
+      body {
+        padding: 8px;
+      }
+
+      .container {
+        padding: 15px 12px;
+      }
+
       h1 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
+
+      p {
+        font-size: 0.85rem;
+      }
+
       .links a {
-        font-size: 0.9rem;
-        padding: 10px;
+        font-size: 0.85rem;
+        padding: 10px 12px;
       }
+
       .profile-pic {
-        width: 90px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
       }
 
       .assistant-box {
-        width: 260px;
-        right: -20px;
+        width: calc(100vw - 8px);
+        right: 4px;
+        max-height: 65vh;
+      }
+
+      .assistant-content {
+        height: calc(65vh - 50px);
+        max-height: 300px;
+      }
+
+      .chat-messages {
+        max-height: calc(65vh - 120px);
+      }
+
+      .assistant-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+
+      .assistant-title {
+        right: 55px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Otimizações específicas para telas muito pequenas */
+    @media (max-width: 320px) {
+      .assistant-box {
+        width: calc(100vw - 4px);
+        right: 2px;
+      }
+
+      .chat-messages {
+        padding: 10px 10px 0 10px;
+      }
+
+      .chat-controls {
+        padding: 10px;
+      }
+
+      .message {
+        font-size: 0.7rem;
+        padding: 5px 7px;
+      }
+
+      .quick-action-btn {
+        padding: 3px 6px;
+        font-size: 0.6rem;
+      }
+    }
+
+    /* Otimizações para orientação landscape em mobile */
+    @media (max-width: 900px) and (orientation: landscape) {
+      .assistant-box {
+        max-height: 60vh;
+        bottom: 50px;
+      }
+
+      .assistant-content {
+        height: calc(60vh - 50px);
+        max-height: 250px;
+      }
+
+      .chat-messages {
+        max-height: calc(60vh - 110px);
       }
     }
   </style>
@@ -739,20 +973,66 @@
     // Suporte para toque em dispositivos móveis
     let touchStartY = 0;
     let touchEndY = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
 
+    // Detectar se é dispositivo móvel
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Gestos de toque para a assistente
     assistantBox.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+      isDragging = false;
+    });
+
+    assistantBox.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const currentY = e.touches[0].clientY;
+        const currentX = e.touches[0].clientX;
+        const deltaY = Math.abs(currentY - touchStartY);
+        const deltaX = Math.abs(currentX - touchStartX);
+        
+        // Se o movimento vertical for maior que horizontal, é um gesto de swipe
+        if (deltaY > deltaX && deltaY > 10) {
+          isDragging = true;
+          e.preventDefault(); // Prevenir scroll da página
+        }
+      }
     });
 
     assistantBox.addEventListener('touchend', (e) => {
-      touchEndY = e.changedTouches[0].clientY;
-      const swipeDistance = touchStartY - touchEndY;
-      
-      // Se o usuário deslizar para baixo mais de 50px, fecha a assistente
-      if (swipeDistance < -50) {
-        toggleAssistant();
+      if (isDragging) {
+        touchEndY = e.changedTouches[0].clientY;
+        const swipeDistance = touchStartY - touchEndY;
+        
+        // Swipe para baixo fecha a assistente
+        if (swipeDistance < -50) {
+          toggleAssistant();
+        }
+        // Swipe para cima maximiza a assistente (se implementado)
+        else if (swipeDistance > 50) {
+          // Futura funcionalidade de maximizar
+        }
       }
+      isDragging = false;
     });
+
+    // Prevenir zoom em dispositivos móveis
+    if (isMobile) {
+      document.addEventListener('gesturestart', (e) => {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gesturechange', (e) => {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gestureend', (e) => {
+        e.preventDefault();
+      });
+    }
 
     // Animação de entrada da assistente após carregamento da página
     setTimeout(() => {
@@ -785,47 +1065,43 @@
     const knowledgeBase = {
       servicos: {
         keywords: ['serviços', 'serviço', 'oferecem', 'fazem', 'trabalham', 'desenvolvem', 'montagem', 'formatação', 'reparo', 'limpeza'],
-        response: `A Byte Sync Informatic oferece os seguintes serviços especializados:
+        response: `🖥️ **Nossos Serviços**
 
-🖥️ **Montagem de Computadores**
-• Montagem personalizada de computadores desktop
-• Configuração e otimização de notebooks
-• Sistemas otimizados para jogos e trabalho profissional
-• Garantia de qualidade em todos os componentes
+**💻 Montagem de Computadores**
+• Desktop personalizado (gaming/profissional)
+• Notebooks otimizados
+• Garantia de qualidade
 
-💻 **Formatação e Sistemas Operacionais**
-• Formatação completa de computadores e notebooks
-• Instalação e configuração de Windows e Linux
-• Instalação e atualização de drivers
-• Backup e recuperação de dados importantes
+**🔧 Formatação e Sistemas**
+• Windows e Linux
+• Drivers atualizados
+• Backup de dados
 
-🔧 **Reparo e Manutenção Técnica**
-• Diagnóstico preciso de problemas de hardware e software
-• Reparo especializado de componentes
-• Substituição de peças com garantia
-• Manutenção preventiva para evitar problemas futuros
+**🛠️ Reparo e Manutenção**
+• Diagnóstico preciso
+• Reparo especializado
+• Manutenção preventiva
 
-🧹 **Limpeza Profissional**
-• Limpeza completa e detalhada de computadores
-• Limpeza especializada de notebooks
-• Troca de pasta térmica para melhor refrigeração
-• Manutenção e limpeza de ventiladores
+**🧹 Limpeza Profissional**
+• Limpeza completa
+• Troca de pasta térmica
+• Manutenção de ventiladores
 
-🌐 **Desenvolvimento Web**
-• Criação de sites responsivos e modernos
-• Desenvolvimento front-end especializado
-• Otimização de performance e usabilidade`
+**🌐 Desenvolvimento Web**
+• Sites responsivos
+• Front-end moderno
+• Otimização de performance`
       },
       contato: {
         keywords: ['contato', 'contatar', 'falar', 'whatsapp', 'telefone', 'email', 'localização', 'onde', 'endereço'],
-        response: `Aqui estão nossas formas de contato:
+        response: `📞 **Contato**
 
-📱 **WhatsApp**: (11) 93052-2075
-📸 **Instagram**: @bytesyncinformatic
-🎵 **TikTok**: @bytesyncinformatic
-💻 **GitHub**: github.com/luanoliveiralab
+**📱 WhatsApp**: (11) 93052-2075
+**📸 Instagram**: @bytesyncinformatic
+**🎵 TikTok**: @bytesyncinformatic
+**💻 GitHub**: github.com/luanoliveiralab
 
-Para atendimento mais rápido e personalizado, recomendamos o contato através do WhatsApp. Você pode acessar diretamente através dos links disponíveis em nosso site.`
+**💡 Recomendação**: WhatsApp para atendimento mais rápido!`
       },
       tecnologias: {
         keywords: ['tecnologias', 'tecnologia', 'linguagens', 'frameworks', 'ferramentas', 'stack', 'frontend', 'desenvolvimento'],
@@ -857,27 +1133,26 @@ Para atendimento mais rápido e personalizado, recomendamos o contato através d
       },
       precos: {
         keywords: ['preços', 'preço', 'valor', 'custo', 'orçamento', 'quanto custa', 'tarifa', 'tabela'],
-        response: `Nossa tabela de preços para serviços de Tecnologia da Informação:
+        response: `💰 **Tabela de Preços**
 
-💻 **Serviços de Manutenção**
-• **Formatação**: A partir de R$ 80,00
-• **Limpeza**: A partir de R$ 60,00
-• **Diagnóstico**: A partir de R$ 40,00
-• **Reparo**: A partir de R$ 100,00
+**💻 Manutenção**
+• Formatação: R$ 80,00
+• Limpeza: R$ 60,00
+• Diagnóstico: R$ 40,00
+• Reparo: R$ 100,00
 
-🖥️ **Montagem de Computadores**
-• **Computador Básico**: A partir de R$ 1.500,00
-• **Computador Gamer**: A partir de R$ 3.000,00
-• **Computador Profissional**: A partir de R$ 2.500,00
-• **Montagem + Formatação**: Serviço incluso
+**🖥️ Montagem**
+• Básico: R$ 1.500,00
+• Gamer: R$ 3.000,00
+• Profissional: R$ 2.500,00
 
-🛒 **Hardware e Periféricos**
-• **Processadores**: R$ 300,00 - R$ 2.000,00
-• **Memórias RAM**: R$ 150,00 - R$ 800,00
-• **HDs e SSDs**: R$ 200,00 - R$ 1.000,00
-• **Periféricos**: R$ 50,00 - R$ 500,00
+**🛒 Hardware**
+• Processadores: R$ 300-2.000
+• RAM: R$ 150-800
+• HD/SSD: R$ 200-1.000
+• Periféricos: R$ 50-500
 
-💡 **Orçamento Personalizado**: Entre em contato através do WhatsApp para solicitar um orçamento específico para suas necessidades!`
+**💡 Orçamento personalizado via WhatsApp!**`
       },
       sobre: {
         keywords: ['sobre', 'empresa', 'quem são', 'história', 'missão', 'visão', 'especialidade'],
@@ -1469,33 +1744,32 @@ Cada componente tem uma função específica e trabalha em conjunto para o funci
       if (topResults.length === 0) {
         return [{
           category: 'default',
-          response: `Interessante pergunta! 🤔
+          response: `🤔 **Interessante pergunta!**
 
-Como Luna, assistente virtual da Byte Sync Informatic, posso auxiliá-lo com:
+Como Luna, posso ajudá-lo com:
 
-**💻 Serviços de Tecnologia da Informação:**
+**💻 Serviços de TI:**
 • Montagem de computadores
-• Formatação e instalação de sistemas operacionais
-• Limpeza e manutenção preventiva
-• Reparo e diagnóstico técnico de problemas
+• Formatação e sistemas
+• Limpeza e manutenção
+• Reparo e diagnóstico
 
-**🛒 Hardware e Periféricos:**
-• Comercialização de processadores, memórias, HDs e SSDs
-• Placas de vídeo, fontes de alimentação, gabinetes
-• Mouses, teclados, headsets, monitores
-• Explicações técnicas sobre componentes
+**🛒 Hardware:**
+• Processadores, RAM, HD/SSD
+• Placas de vídeo, fontes
+• Periféricos e componentes
 
 **🌐 Desenvolvimento Web:**
-• Sites responsivos e modernos
-• Desenvolvimento front-end
-• Otimização de performance
+• Sites responsivos
+• Front-end moderno
+• Otimização
 
-**📞 Contato e Orçamentos:**
-• Formas de contato disponíveis
-• Preços e prazos de serviços
-• Agendamento de atendimento
+**📞 Contato:**
+• WhatsApp, Instagram
+• Preços e orçamentos
+• Agendamento
 
-Por favor, formule uma pergunta mais específica ou utilize os botões de ação rápida disponíveis acima! 😊`,
+Use os botões acima ou faça uma pergunta específica! 😊`,
           relevance: 0
         }];
       }
@@ -1711,36 +1985,35 @@ Por favor, formule uma pergunta mais específica ou utilize os botões de ação
       updateQuickActions(); // Volta aos botões principais
       addMessage(`🏠 **Menu Principal**
 
-Bem-vindo de volta! Como posso ajudá-lo hoje, Luna?
+Bem-vindo de volta! Como posso ajudá-lo hoje?
 
-**💻 Serviços de Tecnologia da Informação:**
+**💻 Serviços de TI:**
 • Montagem de computadores
-• Formatação e instalação de sistemas operacionais
-• Limpeza e manutenção preventiva
-• Reparo e diagnóstico técnico de problemas
+• Formatação e sistemas
+• Limpeza e manutenção
+• Reparo e diagnóstico
 
-**🛒 Hardware e Periféricos:**
-• Comercialização de processadores, memórias, HDs e SSDs
-• Placas de vídeo, fontes de alimentação, gabinetes
-• Mouses, teclados, headsets, monitores
-• Explicações técnicas sobre componentes
+**🛒 Hardware:**
+• Processadores, RAM, HD/SSD
+• Placas de vídeo, fontes
+• Periféricos e componentes
 
 **🌐 Desenvolvimento Web:**
-• Sites responsivos e modernos
-• Desenvolvimento front-end
-• Otimização de performance
+• Sites responsivos
+• Front-end moderno
+• Otimização
 
-**📞 Contato e Orçamentos:**
-• Formas de contato disponíveis
-• Preços e prazos de serviços
-• Agendamento de atendimento
+**📞 Contato:**
+• WhatsApp, Instagram
+• Preços e orçamentos
+• Agendamento
 
-Escolha uma das opções acima ou faça sua pergunta! 😊`);
+Escolha uma opção ou faça sua pergunta! 😊`);
       
       // Adicionar pergunta de avaliação após 1 segundo
       setTimeout(() => {
         showEvaluationQuestion();
-      }, 1000);
+      }, isMobile ? 800 : 1000);
     }
 
     // Função para mostrar pergunta de avaliação
@@ -1757,7 +2030,18 @@ Escolha uma das opções acima ou faça sua pergunta! 😊`);
         </div>
       `;
       chatMessages.appendChild(evaluationMessage);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Scroll suave para mobile
+      if (isMobile) {
+        setTimeout(() => {
+          chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
+      } else {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
       
       // Adicionar event listeners para prevenir propagação
       const evalButtons = evaluationMessage.querySelectorAll('.eval-btn');
@@ -1779,7 +2063,7 @@ Escolha uma das opções acima ou faça sua pergunta! 😊`);
       if (response === 'yes') {
         addMessage(`🎉 **Ótimo!** Fico feliz em ter ajudado!
 
-Se precisar de mais alguma coisa, estou aqui para auxiliá-lo. 😊`, false);
+Se precisar de mais alguma coisa, estou aqui! 😊`, false);
       } else {
         // Se escolheu "Não", oferecer mais opções relacionadas
         showMoreOptions();
@@ -1793,7 +2077,7 @@ Se precisar de mais alguma coisa, estou aqui para auxiliá-lo. 😊`, false);
       
       addMessage(`🤝 **Entendo!** Vou tentar ajudar melhor.
 
-Aqui estão mais opções relacionadas ao assunto:`, false);
+Aqui estão mais opções relacionadas:`, false);
       
       // Mostrar opções específicas baseadas na categoria
       const moreOptions = getMoreOptionsForCategory(lastCategory);
@@ -1896,6 +2180,17 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
         const button = document.createElement('button');
         button.className = 'quick-action-btn';
         button.textContent = action.text;
+        
+        // Adicionar feedback tátil em mobile
+        if (isMobile) {
+          button.addEventListener('touchstart', () => {
+            button.style.transform = 'scale(0.95)';
+          });
+          button.addEventListener('touchend', () => {
+            button.style.transform = '';
+          });
+        }
+        
         button.onclick = (e) => {
           e.stopPropagation();
           sendQuickMessage(action.question);
@@ -1932,13 +2227,35 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
       messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
       messageDiv.innerHTML = message;
       chatMessages.appendChild(messageDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Scroll suave para mobile, instantâneo para desktop
+      if (isMobile) {
+        setTimeout(() => {
+          chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
+      } else {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
     }
 
     // Função para mostrar indicador de digitação
     function showTyping() {
       typingIndicator.classList.add('show');
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Scroll suave para mobile
+      if (isMobile) {
+        setTimeout(() => {
+          chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
+      } else {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
     }
 
     // Função para esconder indicador de digitação
@@ -1950,7 +2267,9 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
     function simulateAIResponse(userMessage) {
       showTyping();
       
-      // Simular tempo de processamento
+      // Tempo de processamento mais rápido em mobile
+      const processingTime = isMobile ? 800 + Math.random() * 1200 : 1000 + Math.random() * 2000;
+      
       setTimeout(() => {
         hideTyping();
         const responses = findBestResponses(userMessage, 1); // Apenas 1 resposta
@@ -1969,9 +2288,9 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
         if (!userMessage.includes('Voltar ao menu principal')) {
           setTimeout(() => {
             showEvaluationQuestion();
-          }, 1000);
+          }, isMobile ? 800 : 1000);
         }
-      }, 1000 + Math.random() * 2000); // 1-3 segundos
+      }, processingTime);
     }
 
     // Função para enviar mensagem
@@ -1985,6 +2304,11 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
       // Adicionar mensagem do usuário
       addMessage(message, true);
       chatInput.value = '';
+      
+      // Em mobile, esconder o teclado após enviar
+      if (isMobile) {
+        chatInput.blur();
+      }
       
       // Simular resposta da IA
       simulateAIResponse(message);
@@ -2003,6 +2327,17 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
         const button = document.createElement('button');
         button.className = 'quick-action-btn';
         button.textContent = action.text;
+        
+        // Adicionar feedback tátil em mobile
+        if (isMobile) {
+          button.addEventListener('touchstart', () => {
+            button.style.transform = 'scale(0.95)';
+          });
+          button.addEventListener('touchend', () => {
+            button.style.transform = '';
+          });
+        }
+        
         button.onclick = (e) => {
           e.stopPropagation();
           sendQuickMessage(action.question);
@@ -2024,6 +2359,12 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
       trackUserSearch(message);
       
       addMessage(message, true);
+      
+      // Em mobile, esconder o teclado se estiver aberto
+      if (isMobile && document.activeElement === chatInput) {
+        chatInput.blur();
+      }
+      
       simulateAIResponse(message);
     }
 
@@ -2050,15 +2391,90 @@ Aqui estão mais opções relacionadas ao assunto:`, false);
       if (!isAssistantOpen) {
         setTimeout(() => {
           chatInput.focus();
+          // Em mobile, scroll para o input quando o teclado aparecer
+          if (isMobile) {
+            setTimeout(() => {
+              chatInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+          }
         }, 300);
       }
     });
 
+    // Otimizações para teclado virtual em mobile
+    if (isMobile) {
+      // Ajustar viewport quando o teclado aparecer
+      let initialViewportHeight = window.innerHeight;
+      
+      window.addEventListener('resize', () => {
+        const currentHeight = window.innerHeight;
+        const heightDifference = initialViewportHeight - currentHeight;
+        
+        // Se a altura diminuiu significativamente, provavelmente o teclado apareceu
+        if (heightDifference > 150) {
+          // Ajustar a altura da assistente
+          const assistantContent = document.querySelector('.assistant-content');
+          if (assistantContent) {
+            assistantContent.style.height = `${currentHeight - 200}px`;
+            assistantContent.style.maxHeight = `${currentHeight - 200}px`;
+          }
+        } else {
+          // Restaurar altura normal
+          const assistantContent = document.querySelector('.assistant-content');
+          if (assistantContent) {
+            assistantContent.style.height = '';
+            assistantContent.style.maxHeight = '';
+          }
+        }
+      });
+
+      // Prevenir scroll da página quando o teclado estiver aberto
+      chatInput.addEventListener('focus', () => {
+        setTimeout(() => {
+          document.body.style.position = 'fixed';
+          document.body.style.width = '100%';
+        }, 100);
+      });
+
+      chatInput.addEventListener('blur', () => {
+        setTimeout(() => {
+          document.body.style.position = '';
+          document.body.style.width = '';
+        }, 100);
+      });
+    }
+
     // Inicializar botões de ação rápida dinâmicos
     updateQuickActions();
     
+    // Otimizações específicas para mobile
+    if (isMobile) {
+      // Prevenir zoom em toque duplo
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', (event) => {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+      
+      // Melhorar performance de scroll
+      document.addEventListener('touchmove', (e) => {
+        if (e.target.closest('.chat-messages')) {
+          e.target.style.willChange = 'transform';
+        }
+      }, { passive: true });
+      
+      // Otimizar para teclado virtual
+      const viewport = document.querySelector('meta[name=viewport]');
+      if (viewport) {
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
+      }
+    }
+    
     // Debug: Mostrar que IA está ativa
-    console.log('IA inicializada com botões dinâmicos');
+    console.log(`IA inicializada com botões dinâmicos - Mobile: ${isMobile}`);
   </script>
 </body>
 </html>
