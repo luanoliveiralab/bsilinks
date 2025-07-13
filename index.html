@@ -242,6 +242,42 @@
       text-align: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 13px 13px 0 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clear-chat-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: white;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .clear-chat-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .clear-chat-btn:active {
+      transform: translateY(-50%) scale(0.95);
     }
 
     .assistant-header h3 {
@@ -345,6 +381,12 @@
       border: 1px solid rgba(70, 41, 117, 0.3);
       margin-right: 20px;
       box-shadow: 0 0 8px rgba(70, 41, 117, 0.2);
+    }
+
+    .message.confirmation-message {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      box-shadow: 0 0 8px rgba(255, 193, 7, 0.2);
     }
 
     .chat-input-container {
@@ -591,6 +633,13 @@
 
       .assistant-header h3 {
         font-size: 0.9rem;
+      }
+
+      .clear-chat-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        right: 12px;
       }
 
       .assistant-content {
@@ -859,6 +908,9 @@
     <div class="assistant-box" id="assistantBox">
       <div class="assistant-header">
         <h3>Luna - Feita com IA.</h3>
+        <button class="clear-chat-btn" id="clearChatBtn" aria-label="Limpar histórico do chat">
+          🗑️
+        </button>
       </div>
       
       <div class="assistant-content">
@@ -949,6 +1001,21 @@
         assistantBox.classList.remove('active');
         assistantToggle.setAttribute('aria-label', 'Abrir Luna - assistente virtual');
         assistantToggle.querySelector('span').textContent = '🌙';
+        
+        // Remover foco do input quando fechar a assistente
+        if (chatInput) {
+          chatInput.blur();
+          
+          // Em mobile, forçar esconder o teclado
+          if (isMobile) {
+            // Pequeno delay para garantir que o blur seja processado
+            setTimeout(() => {
+              chatInput.blur();
+              // Forçar perder o foco de qualquer elemento
+              document.activeElement && document.activeElement.blur();
+            }, 50);
+          }
+        }
       }
     }
 
@@ -969,6 +1036,22 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isAssistantOpen) {
         toggleAssistant();
+      }
+    });
+
+    // Funcionalidade para limpar o chat
+    const clearChatBtn = document.getElementById('clearChatBtn');
+    
+    clearChatBtn.addEventListener('click', () => {
+      // Confirmar antes de limpar
+      if (isMobile) {
+        // Em mobile, usar uma confirmação mais amigável
+        showMobileConfirmation();
+      } else {
+        // Em desktop, usar confirm padrão
+        if (confirm('Tem certeza que deseja limpar todo o histórico do chat?')) {
+          clearChatHistory();
+        }
       }
     });
 
@@ -1936,6 +2019,88 @@ Use os botões acima ou faça uma pergunta específica! 😊`,
       }
     };
 
+    // Função para mostrar confirmação mobile
+    function showMobileConfirmation() {
+      const confirmationMessage = document.createElement('div');
+      confirmationMessage.className = 'message assistant confirmation-message';
+      confirmationMessage.innerHTML = `
+        <div style="margin-bottom: 15px;">
+          <strong>🗑️ Limpar histórico?</strong><br>
+          Tem certeza que deseja apagar todo o histórico do chat?
+        </div>
+        <div class="evaluation-buttons">
+          <button class="eval-btn eval-yes" onclick="confirmClearChat()">✅ Sim, limpar</button>
+          <button class="eval-btn eval-no" onclick="cancelClearChat()">❌ Cancelar</button>
+        </div>
+      `;
+      chatMessages.appendChild(confirmationMessage);
+      
+      // Scroll suave para mobile
+      if (isMobile) {
+        setTimeout(() => {
+          chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
+      } else {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      
+      // Adicionar event listeners para prevenir propagação
+      const evalButtons = confirmationMessage.querySelectorAll('.eval-btn');
+      evalButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      });
+    }
+
+    // Função para confirmar limpeza do chat
+    function confirmClearChat() {
+      // Remover mensagem de confirmação
+      const confirmationMessage = document.querySelector('.confirmation-message');
+      if (confirmationMessage) {
+        confirmationMessage.remove();
+      }
+      
+      clearChatHistory();
+    }
+
+    // Função para cancelar limpeza do chat
+    function cancelClearChat() {
+      // Remover mensagem de confirmação
+      const confirmationMessage = document.querySelector('.confirmation-message');
+      if (confirmationMessage) {
+        confirmationMessage.remove();
+      }
+    }
+
+    // Função para limpar o histórico do chat
+    function clearChatHistory() {
+      // Limpar todas as mensagens exceto a inicial
+      const messages = chatMessages.querySelectorAll('.message:not(.initial-message)');
+      messages.forEach(message => message.remove());
+      
+      // Limpar histórico de pesquisas
+      userSearchHistory = [];
+      categoryWeights = {};
+      searchCount = 0;
+      
+      // Resetar categoria da última resposta
+      window.lastResponseCategory = null;
+      
+      // Mostrar mensagem de confirmação
+      addMessage(`🗑️ **Histórico limpo!**
+
+Chat reiniciado com sucesso. Como posso ajudá-lo hoje? 😊`, false);
+      
+      // Voltar aos botões principais
+      updateQuickActions();
+      
+      // Não adicionar pergunta de avaliação após limpar o histórico
+    }
+
     // Função para voltar ao menu principal
     function goToMainMenu() {
       updateQuickActions(); // Volta aos botões principais
@@ -1966,10 +2131,7 @@ Bem-vindo de volta! Como posso ajudá-lo hoje?
 
 Escolha uma opção ou faça sua pergunta! 😊`);
       
-      // Adicionar pergunta de avaliação após 1 segundo
-      setTimeout(() => {
-        showEvaluationQuestion();
-      }, isMobile ? 800 : 1000);
+      // Não adicionar pergunta de avaliação ao voltar ao início
     }
 
     // Função para mostrar pergunta de avaliação
@@ -2354,6 +2516,12 @@ Aqui estão mais opções relacionadas:`, false);
             }, 500);
           }
         }, 300);
+      } else {
+        // Se estiver fechando, remover foco imediatamente
+        if (isMobile) {
+          chatInput.blur();
+          document.activeElement && document.activeElement.blur();
+        }
       }
     });
 
