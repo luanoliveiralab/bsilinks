@@ -242,44 +242,6 @@
       text-align: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 13px 13px 0 0;
-      position: relative;
-      cursor: grab;
-    }
-
-    .assistant-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 30px;
-      background: transparent;
-      cursor: grab;
-    }
-
-    /* Indicador visual para gesto de fechar em mobile */
-    @media (max-width: 600px) {
-      .assistant-header::after {
-        content: '⬇️ Deslize para fechar';
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.7rem;
-        color: rgba(255, 255, 255, 0.7);
-        opacity: 0.8;
-        pointer-events: none;
-        animation: fadeInOut 2s ease-in-out infinite;
-      }
-      
-      @keyframes fadeInOut {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 0.8; }
-      }
-    }
-
-    .assistant-header:active {
-      cursor: grabbing;
     }
 
     .assistant-header h3 {
@@ -1010,72 +972,8 @@
       }
     });
 
-    // Suporte para toque em dispositivos móveis
-    let touchStartY = 0;
-    let touchEndY = 0;
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let isDragging = false;
-
     // Detectar se é dispositivo móvel
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Gestos de toque para a assistente
-    assistantBox.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-      touchStartX = e.touches[0].clientX;
-      isDragging = false;
-      
-      // Verificar se o toque foi na área do header
-      const touchY = e.touches[0].clientY;
-      const boxRect = assistantBox.getBoundingClientRect();
-      const relativeY = touchY - boxRect.top;
-      
-      // Só ativar gestos se tocar na área do header (primeiros 60px)
-      if (relativeY < 60) {
-        isDragging = true;
-      }
-      
-      // Se tocar na área de mensagens, não ativar gestos
-      const chatMessages = document.querySelector('.chat-messages');
-      if (chatMessages && chatMessages.contains(e.target)) {
-        isDragging = false;
-      }
-    });
-
-    assistantBox.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 1 && isDragging) {
-        const currentY = e.touches[0].clientY;
-        const currentX = e.touches[0].clientX;
-        const deltaY = Math.abs(currentY - touchStartY);
-        const deltaX = Math.abs(currentX - touchStartX);
-        
-        // Verificar se o scroll das mensagens está no topo
-        const chatMessages = document.querySelector('.chat-messages');
-        const isAtTop = chatMessages && chatMessages.scrollTop === 0;
-        
-        // Só prevenir scroll se for um movimento vertical significativo
-        // E se estiver no topo das mensagens ou for na área do header
-        if (deltaY > deltaX && deltaY > 15 && (isAtTop || e.target.closest('.assistant-header'))) {
-          e.preventDefault(); // Prevenir scroll da página
-        }
-      }
-    });
-
-    assistantBox.addEventListener('touchend', (e) => {
-      if (isDragging) {
-        touchEndY = e.changedTouches[0].clientY;
-        touchEndX = e.changedTouches[0].clientX;
-        const swipeDistance = touchStartY - touchEndY;
-        const deltaX = Math.abs(touchEndX - touchStartX);
-        
-        // Swipe para baixo (mais de 100px) e movimento horizontal menor que 50px
-        if (swipeDistance < -100 && deltaX < 50) {
-          toggleAssistant();
-        }
-      }
-      isDragging = false;
-    });
 
     // Prevenir zoom em dispositivos móveis
     if (isMobile) {
